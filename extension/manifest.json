@@ -1,0 +1,10 @@
+{
+  "name": "White Lies Compass",
+  "manifest_version": 2,
+  "version":"0.1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "White Lies Compass",
+    "default_popup": "index.html"
+  }
+}
