@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>WLC Internet Compass</title>
+    <link rel="stylesheet"  href="/webfonts/ss-standard.css"/>
+    <link rel="stylesheet" href="/build/popup.css">
+  </head>
+  <body>
+    <div id='page'>
+    </div>
+    <script src="/build/popup.js"></script>
+    <script>
+            // Custom error handling
+            $(window).on('error', WLC.errorHandler);
+            // Boot App
+            WLC($('body'));
+    </script>
+  </body>
+</html>
