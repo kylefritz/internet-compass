@@ -2,7 +2,7 @@ window.WLC = ($root) ->
   WLC.router = new WLC.Router(el: $root.find('#page'))
   WLC.captureLinks($root)
   WLC.captureForms($root)
-  Backbone.history.start pushState: true, root: WLC.Paths.root()
+  Backbone.history.start root: WLC.Paths.root()
 
 WLC.Collections = {}
 WLC.Models = {}
@@ -15,9 +15,9 @@ WLC.Routes =
   settings:                            'settings'
 
 WLC.Paths =
-  root: ->                      '/' + WLC.Routes.compass
-  compass: ->              '/' + WLC.Routes.compass
-  settings: ->                '/' + WLC.Routes.settings
+  root: ->                      '/popup.html#' + WLC.Routes.compass
+  compass: ->              '/popup.html#' + WLC.Routes.compass
+  settings: ->                '/popup.html#' + WLC.Routes.settings
 
 WLC.navigate = (path) ->              Backbone.history.navigate path, trigger: true
 
@@ -29,11 +29,11 @@ WLC.captureLinks = ($el) ->
 
     if $(this).hasClass('disabled') #no nav on disabled.
       evt.preventDefault()
-    else
-      matches = /^\/(.*)/i.exec href
-      if matches?
-        evt.preventDefault()
-        Backbone.history.navigate matches[1], trigger: true
+    # else
+      # matches = /^\/(.*)/i.exec href
+      # if matches?
+      #   evt.preventDefault()
+      #   Backbone.history.navigate matches[1], trigger: true
 
 WLC.captureForms = ($el) ->
   $el.on "submit", "form", (evt) ->

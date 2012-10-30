@@ -5778,3 +5778,15 @@ a.badge:hover {
 
 
  */
+
+
+body{
+  background: #E9E9E9;
+}
+ #page{
+  background:white;
+  width: 400px;
+  height: 300px;
+  padding:30px;
+  margin: 0 auto;
+ }

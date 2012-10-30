@@ -12315,26 +12315,26 @@ Handlebars.template = Handlebars.VM.template;
 function program1(depth0,data) {
   
   var buffer = "";
-  buffer += "\n  <li><span class=\"ss-icon\">check</span>";
+  buffer += "\n  <li>";
   depth0 = typeof depth0 === functionType ? depth0() : depth0;
   buffer += escapeExpression(depth0) + "</li>\n  ";
   return buffer;}
 
-  buffer += "<h3>mittens!</h3>\n<h4>";
+  buffer += "<h3><span class=\"ss-icon\">navigate</span> Internet Compass</h3>\n<h4>";
   foundHelper = helpers.message;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</h4>\n<ul class=\"unstyled\">\n  ";
+  buffer += escapeExpression(stack1) + "</h4>\n<ul>\n  ";
   foundHelper = helpers.mittens;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)}); }
   else { stack1 = depth0.mittens; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   if (!helpers.mittens) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</ul>\n<hr/>\n<p>\n  <a href=\"";
+  buffer += "\n</ul>\n\n<div class=\"form-actions\">\n  <a href=\"";
   foundHelper = helpers.settingsPath;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.settingsPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\">\n    <span class=\"ss-icon\">settings</span>\n  </a>\n</p>\n";
+  buffer += escapeExpression(stack1) + "\">\n    <span class=\"ss-icon\">settings</span>\n  </a>\n</div>\n";
   return buffer;});
             return this.HandlebarsTemplates["compass"];
           }).call(this);
@@ -12345,11 +12345,11 @@ function program1(depth0,data) {
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<h3><span class=\"ss-icon\">settings</span>Settings</h3>\n<p class='muted'></p>\n<p>\n  <a href=\"";
+  buffer += "<h3><span class=\"ss-icon\">settings</span> Settings</h3>\n<p class='alert alert-info'>\n  <strong>No Settings Yet.</strong> We'll make some later.\n</p>\n\n<div class=\"form-actions\">\n  <a href=\"";
   foundHelper = helpers.compassPath;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.compassPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\">Back to compass</a>\n</p>\n";
+  buffer += escapeExpression(stack1) + "\">\n  <span class=\"ss-icon\">\n      back\n    </span>\n  </a>\n</div>\n";
   return buffer;});
             return this.HandlebarsTemplates["settings"];
           }).call(this);
@@ -12362,7 +12362,6 @@ function program1(depth0,data) {
     WLC.captureLinks($root);
     WLC.captureForms($root);
     return Backbone.history.start({
-      pushState: true,
       root: WLC.Paths.root()
     });
   };
@@ -12386,13 +12385,13 @@ function program1(depth0,data) {
 
   WLC.Paths = {
     root: function() {
-      return '/' + WLC.Routes.compass;
+      return '/popup.html#' + WLC.Routes.compass;
     },
     compass: function() {
-      return '/' + WLC.Routes.compass;
+      return '/popup.html#' + WLC.Routes.compass;
     },
     settings: function() {
-      return '/' + WLC.Routes.settings;
+      return '/popup.html#' + WLC.Routes.settings;
     }
   };
 
@@ -12408,18 +12407,10 @@ function program1(depth0,data) {
 
   WLC.captureLinks = function($el) {
     return $el.on("click", "a", function(evt) {
-      var href, matches;
+      var href;
       href = $(this).attr("href");
       if ($(this).hasClass('disabled')) {
         return evt.preventDefault();
-      } else {
-        matches = /^\/(.*)/i.exec(href);
-        if (matches != null) {
-          evt.preventDefault();
-          return Backbone.history.navigate(matches[1], {
-            trigger: true
-          });
-        }
       }
     });
   };
@@ -12628,3 +12619,8 @@ function program1(depth0,data) {
 
 
 
+
+// Custom error handling
+$(window).on('error', WLC.errorHandler);
+// Boot App
+WLC($('body'));
