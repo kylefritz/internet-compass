@@ -12,10 +12,12 @@ WLC.Mixins = {}
 WLC.Helpers = {}
 WLC.Routes =
   compass:                           ''
+  settings:                            'settings'
 
 WLC.Paths =
-  root: ->                      WLC.Routes.compass
-  compass: ->              WLC.Routes.compass
+  root: ->                      '/' + WLC.Routes.compass
+  compass: ->              '/' + WLC.Routes.compass
+  settings: ->                '/' + WLC.Routes.settings
 
 WLC.navigate = (path) ->              Backbone.history.navigate path, trigger: true
 

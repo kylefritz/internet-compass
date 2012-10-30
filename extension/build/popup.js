@@ -12315,24 +12315,43 @@ Handlebars.template = Handlebars.VM.template;
 function program1(depth0,data) {
   
   var buffer = "";
-  buffer += "\n    <li><span class=\"ss-icon\">check</span>";
+  buffer += "\n  <li><span class=\"ss-icon\">check</span>";
   depth0 = typeof depth0 === functionType ? depth0() : depth0;
-  buffer += escapeExpression(depth0) + "</li>\n    ";
+  buffer += escapeExpression(depth0) + "</li>\n  ";
   return buffer;}
 
-  buffer += "<div>\n  <h3>mittens!</h3>\n  <h4>";
+  buffer += "<h3>mittens!</h3>\n<h4>";
   foundHelper = helpers.message;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</h4>\n  <ul class=\"unstyled\">\n    ";
+  buffer += escapeExpression(stack1) + "</h4>\n<ul class=\"unstyled\">\n  ";
   foundHelper = helpers.mittens;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)}); }
   else { stack1 = depth0.mittens; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   if (!helpers.mittens) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </ul>\n</div>\n";
+  buffer += "\n</ul>\n<hr/>\n<p>\n  <a href=\"";
+  foundHelper = helpers.settingsPath;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.settingsPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\">\n    <span class=\"ss-icon\">settings</span>\n  </a>\n</p>\n";
   return buffer;});
             return this.HandlebarsTemplates["compass"];
+          }).call(this);
+          (function() {
+            this.HandlebarsTemplates || (this.HandlebarsTemplates = {});
+            this.HandlebarsTemplates["settings"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<h3><span class=\"ss-icon\">settings</span>Settings</h3>\n<p class='muted'></p>\n<p>\n  <a href=\"";
+  foundHelper = helpers.compassPath;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.compassPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\">Back to compass</a>\n</p>\n";
+  return buffer;});
+            return this.HandlebarsTemplates["settings"];
           }).call(this);
 (function() {
 
@@ -12361,15 +12380,19 @@ function program1(depth0,data) {
   WLC.Helpers = {};
 
   WLC.Routes = {
-    compass: ''
+    compass: '',
+    settings: 'settings'
   };
 
   WLC.Paths = {
     root: function() {
-      return WLC.Routes.compass;
+      return '/' + WLC.Routes.compass;
     },
     compass: function() {
-      return WLC.Routes.compass;
+      return '/' + WLC.Routes.compass;
+    },
+    settings: function() {
+      return '/' + WLC.Routes.settings;
     }
   };
 
@@ -12458,6 +12481,10 @@ function program1(depth0,data) {
       return this.launch(WLC.Views.Compass);
     };
 
+    Router.prototype.settings = function() {
+      return this.launch(WLC.Views.Settings);
+    };
+
     Router.prototype.noRoute = function() {
       var fragment;
       fragment = Backbone.history.fragment;
@@ -12526,6 +12553,10 @@ function program1(depth0,data) {
       return this;
     };
 
+    Compass.prototype.settingsPath = function() {
+      return WLC.Paths.settings();
+    };
+
     Compass.prototype.message = function() {
       return 'hi mittens';
     };
@@ -12557,6 +12588,32 @@ function program1(depth0,data) {
     };
 
     return NoRoute;
+
+  })(Backbone.View);
+
+}).call(this);
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  WLC.Views.Settings = (function(_super) {
+
+    __extends(Settings, _super);
+
+    function Settings() {
+      return Settings.__super__.constructor.apply(this, arguments);
+    }
+
+    Settings.prototype.render = function() {
+      this.$el.html(WLC.Templates.settings(this));
+      return this;
+    };
+
+    Settings.prototype.compassPath = function() {
+      return WLC.Paths.compass();
+    };
+
+    return Settings;
 
   })(Backbone.View);
 

@@ -3,9 +3,8 @@ class WLC.Views.Compass extends Backbone.View
     @$el.html(WLC.Templates.compass(this))
     this
 
-  message: ->
-    'hi mittens'
-
+  settingsPath: -> WLC.Paths.settings()
+  message: -> 'hi mittens'
   mittens: ->
     [
       'becky'

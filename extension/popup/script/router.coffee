@@ -6,6 +6,7 @@ class WLC.Router extends Backbone.Router
     _(WLC.Routes).each (v, k) => @route v, k
 
   compass: ->       @launch(WLC.Views.Compass)
+  settings: ->        @launch(WLC.Views.Settings)
 
   noRoute: ->
     fragment = Backbone.history.fragment
