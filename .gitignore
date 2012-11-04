@@ -1,2 +1,9 @@
 .DS_Store
 .env
+
+#build directories for browser extensions
+extension/build
+
+#guard caches
+.guard_history
+.sass-cache
