@@ -5790,3 +5790,7 @@ body{
   padding:30px;
   margin: 0 auto;
  }
+
+ body.js-error #page{
+  background-color: red;
+ }

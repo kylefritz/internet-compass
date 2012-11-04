@@ -14,7 +14,7 @@ root = File.expand_path('../extension/', __FILE__)
   #js
   script_path                      = File.join root, bundle, 'script'
   root_script                      = File.join script_path, "_#{bundle}.js"
-  script_output                  =  File.join(root, 'build', "#{bundle}.js")
+  script_output                  = File.join(root, 'build', "#{bundle}.js")
   script_vendor_path        = File.join(root, 'vendor', 'script')
   script_paths = [
     HandlebarsAssets.path,

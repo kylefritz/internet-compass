@@ -12310,27 +12310,10 @@ Handlebars.template = Handlebars.VM.template;
             this.HandlebarsTemplates || (this.HandlebarsTemplates = {});
             this.HandlebarsTemplates["compass"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
 
-function program1(depth0,data) {
-  
-  var buffer = "";
-  buffer += "\n  <li>";
-  depth0 = typeof depth0 === functionType ? depth0() : depth0;
-  buffer += escapeExpression(depth0) + "</li>\n  ";
-  return buffer;}
 
-  buffer += "<h3><span class=\"ss-icon\">navigate</span> Internet Compass</h3>\n<h4>";
-  foundHelper = helpers.message;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</h4>\n<ul>\n  ";
-  foundHelper = helpers.mittens;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)}); }
-  else { stack1 = depth0.mittens; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  if (!helpers.mittens) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)}); }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</ul>\n\n<div class=\"form-actions\">\n  <a href=\"";
+  buffer += "<h3><span class=\"ss-icon\">navigate</span> Internet Compass</h3>\n<canvas id=\"canvas\" width=\"19\" height=\"19\" />\n\n<div class=\"form-actions\">\n  <a href=\"";
   foundHelper = helpers.settingsPath;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.settingsPath; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -12540,7 +12523,24 @@ function program1(depth0,data) {
     }
 
     Compass.prototype.render = function() {
+      var canvas, context, imageData;
       this.$el.html(WLC.Templates.compass(this));
+      canvas = $('<canvas/>')[0];
+      canvas.height = 19;
+      canvas.width = 19;
+      context = canvas.getContext("2d");
+      context.translate(9.5, 9.5);
+      context.rotate(Math.PI * 2 * (270 / 360));
+      context.moveTo(0, -7.5);
+      context.lineTo(7.5, 7.5);
+      context.lineTo(-7.5, 7.5);
+      context.lineTo(0, -7.5);
+      context.strokeStyle = "#000";
+      context.stroke();
+      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      window.chrome.browserAction.setIcon({
+        imageData: imageData
+      });
       return this;
     };
 
