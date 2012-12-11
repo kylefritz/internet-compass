@@ -13,3 +13,5 @@ gem 'guard-sprockets', :git => "https://github.com/kylefritz/guard-sprockets", :
 gem 'growl'
 gem 'terminal-notifier-guard'
 gem 'adsf'
+
+gem 'sinatra'
